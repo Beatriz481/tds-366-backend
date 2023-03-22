@@ -1,1 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css" />
+    <script defer src="comportamento.js"></script>
+    <title>App Tasks</title>
+</head>
+<body>
+    <main>
+        <h2>Nova Tarefa</h2>
+        <form id = "form-tarefa" action="#">
+            <input type="text" autocomplete="off" id="descricao" placeholder="Descrição">
+            <input type="text" autocomplete="off" id="responsavel" placeholder="responsável">
+            <input type="text" autocomplete="off" id="nivel" placeholder="nível">
+            <input type="text" autocomplete="off" id="prioridade" placeholder="Prioridade">
+            <input type="text" autocomplete="off" id="situacao" placeholder="Situação">
+            <div id="form-buttons">
+                <input id="btn-cancelar" type="reset" value="cancelar"/>
+                <input id="btn-confirmar" type="submit" value="Adicionar Tarefa"/>
+            </div>
+        </form>
+        <h2>Tarefas Cadastradas</h2>
 
+        <ul id="list-tarefa"></ul>
+    </main>
+    
+</body>
+</html>

@@ -1,0 +1,36 @@
+body{
+    background: rgb(37, 113, 138);
+    font-family: sans-serif;   
+}
+
+main{
+    border: 1px solid white;
+    border-radius: 1rem;
+    margin: 0 auto;
+    width: 60%;
+    margin-top: 5rem;
+}
+
+h2{
+    text-align: center;
+}
+
+#form-tarefa{
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    max-width: 20rem;
+    margin: 0 auto;
+}
+
+#form-tarefa input{
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#form-buttons{
+    
+    display: flex;
+    justify-content: space-between;
+}
