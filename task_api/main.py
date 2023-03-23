@@ -15,11 +15,7 @@ tarefas: list[Tarefa] = []
 
 situacao_tarefa = ['NOVA', 'EM ANDAMENTO', 'PENDENTE', 'RESOLVIDA', 'CANCELADA']
 
-nivel_tarefa = [1,3,5,8]
 
-prioridade_tarefa = [1,2,3]
-
-prox_id = 1
 
 @tasks.get('/tarefas')
 def listar():
@@ -27,21 +23,36 @@ def listar():
 
 @tasks.post('/tarefas', status_code=status.HTTP_201_CREATED)
 def adicionar(tarefa: Tarefa):
-    global prox_id
-    tarefa.id = prox_id
-    tarefa.situacao = situacao_tarefa[0]
-    tarefas.append(tarefa)
-    prox_id += 1
-    return tarefas
-
-@tasks.delete('/tarefas/{tarefa_id}', status_code=status.HTTP_204_NO_CONTENT)
-def remover(tarefa_id: int):
-    for tarefa_atual in tarefas:
-        if tarefa_atual.id == tarefa_id:
-            tarefas.remove(tarefa_atual)
-            return ('Tarefa Removida.')
+    nivel_tarefa = [1,3,5,8]
+    prioridade_tarefa = [1,2,3]
     
-    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Tarefa não encontrada')
+    if tarefa.nivel not in nivel_tarefa:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f'ERRO:Para nível escolha 1, 3, 5 ou 8')
+    
+    if tarefa.prioridade not in prioridade_tarefa:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"ERRO:Para Prioridade escolha 1, 2, ou 3")
+    
+    tarefa.id = len(tarefas)
+    tarefas.append(tarefa)
+    return 'Tarefa adicionada.'
+        
+
+    
+
+@tasks.put('/tarefas/cancelar/{tarefa_id}', status_code=status.HTTP_204_NO_CONTENT)
+def cancelar(tarefa_id: int):
+    for tarefa in tarefas:
+        if tarefa.id == tarefa_id:
+            if tarefa.situacao == 'Cancelada':
+                   raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                                    detail= f'A tarefa {tarefa_id} já está cancelada')
+            else:
+                tarefa.situacao = 'Cancelada'
+                return
+    
+    
 
 @tasks.get('/tarefas/{tarefa_id}')
 def obter_tarefa(tarefa_id: int, response: Response):
