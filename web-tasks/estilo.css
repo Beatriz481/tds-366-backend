@@ -30,7 +30,16 @@ h2{
 }
 
 #form-buttons{
+    margin: 0 auto;
+    margin-top: 1rem;
     
-    display: flex;
-    justify-content: space-between;
+}
+
+
+#list-tarefa{
+    list-style: none;
+}
+
+#list-tarefa li{
+    font-size: 1rem;
 }
